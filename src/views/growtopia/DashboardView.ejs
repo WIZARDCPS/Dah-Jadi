@@ -1,152 +1,342 @@
 
-
 <!DOCTYPE html>
-<html lang="en" style="background-color: rgba(0,0,0,0.0); width:100%; height: 100%;">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growtopia Player Support</title>
-    <link rel="icon" type="image/png" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" sizes="16x16"/>
-    <link rel="shortcut icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon">
-    <link rel="icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon">
-    <!-- include bootstrap and custom  css -->
-    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/faq-main.css">
-    <!-- include custom  css -->
-    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/shop-custom.css">
-    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/ingame-custom.css">
+    <title>Gtpsid - Menu</title>
+    <script src="https://cdn.tailwindcss.com"←→/script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.1);
-        !important
+        /* [Previous styles remain the same until media queries] */
+        body {
+            background: transparent !important;
+            font-size: 14px;
         }
-        .modal-backdrop + div {
-            overflow: auto;
+
+        .login-container {
+            position: relative;
+            background: black;
+            padding: 3px;
+            border-radius: 12px;
+            overflow: hidden;
         }
-        .modal-body, .content {
-            padding: 0;
+
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(#ff0000, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000);
+            animation: rgb-rotate 3s linear infinite;
+        }
+
+        .login-content {
+            position: relative;
+            background: black;
+            border-radius: 10px;
+            padding: 0.3rem;
+            z-index: 1;
+        }
+
+        @keyframes rgb-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animated-text span {
+            display: inline-block;
+            margin: 0 0.05rem;
+            transition: color 0.2s;
+        }
+
+        .input-field {
+            background-color: rgba(43, 77, 109, 0.3);
+            border: 1px solid rgba(129, 212, 250, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus-within {
+            border-color: #00b8ff;
+            box-shadow: 0 0 8px rgba(0, 184, 255, 0.3);
+        }
+
+        .login-button {
+            background: linear-gradient(45deg, #00b8ff, #0056e0);
+            transition: all 0.3s ease;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(45deg, #0056e0, #00b8ff);
+            transform: scale(1.03);
+        }
+
+        /* Mobile adjustments - unchanged */
+        @media (max-width: 640px) {
+            .login-container {
+                width: 85%;
+                margin: 0.4rem auto;
+                transform: scale(0.8);
+            }
+
+            .login-content {
+                padding: 0.5rem;
+            }
+
+            .animated-text {
+                font-size: 1rem;
+            }
+
+            .login-content h1 {
+                font-size: 1rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .input-field {
+                padding: 0.4rem;
+            }
+
+            .input-field input {
+                font-size: 0.75rem;
+            }
+
+            .login-button {
+                height: 32px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Tablet screens */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .login-container {
+                width: 60%;  /* Reduced from 70% */
+                max-width: 500px;
+                transform: scale(0.9);
+            }
+
+            .login-content {
+                padding: 1rem;
+            }
+
+            .animated-text {
+                font-size: 1.25rem;
+            }
+
+            .input-field {
+                padding: 0.6rem;
+            }
+
+            .login-button {
+                height: 36px;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Desktop screens - adjusted width */
+        @media (min-width: 1024px) {
+            .login-container {
+                width: 40%;  /* Reduced from 65% */
+                max-width: 450px;  /* Added max-width */
+                transform: scale(1.1);
+                margin: 2rem auto;
+            }
+
+            .login-content {
+                padding: 1.25rem;
+            }
+
+            .animated-text {
+                font-size: 1.5rem;
+            }
+
+            .input-field {
+                padding: 0.75rem;
+            }
+
+            .input-field input {
+                font-size: 0.875rem;
+            }
+
+            .login-button {
+                height: 40px;
+                font-size: 0.875rem;
+            }
+
+            .fas {
+                font-size: 1rem;
+            }
+        }
+
+        /* Shared button styles */
+        #loginButton,
+        #createGrowIdButton {
+            width: 100%;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+        }
+
+        #createGrowIdButton {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+        }
+
+        #createGrowIdButton:hover {
+            background: linear-gradient(45deg, #16a34a, #22c55e);
         }
     </style>
 </head>
 
-<body style="background-color: rgba(0,0,0,0.0);">
-<button type="button" class="btn btn-primary hidden" data-toggle="modal" id="modalButton"
-        data-target="#modalShow" data-backdrop="static" data-keyboard="false"></button>
-<div class="content">
-    <section class="common-box ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="row">
-                        <div class="modal fade product-list-popup" id="modalShow" tabindex="-1"
-                             role="dialog" aria-hidden="false">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-
-
-
-
-
-                                    <div class="modal-body">
-                                        <div class="content">
-    <section class="common-box ">
-        <div class="container">
-            <div class="section-title center-align">
-                <h2>Log in with your GTPS ID</h2>
-            </div>
-                        <div class="row div-content-center">
-                <div class="col-md-12 col-sm-12">
-                                        <form method="POST" action="https://login.creativeps.eu/player/growid/login/validate" accept-charset="UTF-8" class="" role="form" required="required" autocomplete="off"><input name="_token" type="hidden" value="">
-                    <div class="form-group">
-                        <input id="login-name" class="form-control grow-text" placeholder="Your GTPSID Name" name="growId" type="text">
-                    </div>
-                    <div class="form-group">
-                        <input id="password" class="form-control grow-text" placeholder="Your GTPSID Password" name="password" type="password" value="">
-                    </div>
-                     <div class="form-group">
-                        <small>Create account? Enter Name without Password & Log In!</small>
-                    </div>
-                    <div class="form-group text-center forgot-password">
-                        <a href="https://chat.whatsapp.com/FHGjrid7v3k3224O0Sz7eU" target="_blank">Need Help? Join our WhatsApp!</a>
-                    </div>
-                    <div class="form-group text-center">
-                        <input class="btn btn-lg btn-primary grow-button" type="submit" value="Log in">
-                    </div>
-                    </form>
+<!-- [Rest of the HTML remains exactly the same] -->
+<body class="flex flex-col items-center justify-center min-h-screen py-2">
+    <!-- [Previous body content remains unchanged] -->
+    <div class="fixed inset-0 flex items-center justify-center">
+        <div class="login-container">
+            <div class="login-content">
+                <h1 id="animatedText" class="animated-text text-center font-bold mb-2"></h1>
+                <div id="errorDiv" class="hidden flex flex-col mt-2 text-xs text-red-500 font-bold px-2 py-1 bg-red-900/30 rounded">
+                    <span id="errorMessage"></span>
                 </div>
-            </div>
-        </div>
-    </section>
-</div>
 
-                                    </div>
-                                </div>
-                            </div>
+                <form method="post" action="/player/growid/login/validate" accept-charset="UTF-8" id="loginForm" class="mt-2 space-y-2">
+                    <div class="mb-2">
+                        <input name="type" value="log" type="hidden" />
+                        <input name="_token" value="{}" type="hidden" />
+                        <label for="loginGrowId" class="block text-white text-xs mb-1">GrowID</label>
+                        <div class="input-field flex items-center rounded-lg px-2 py-1.5">
+                            <i class="fas fa-user text-white mr-2"></i>
+                            <input type="text" name="growId" id="loginGrowId" class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none" placeholder="Enter your growid">
                         </div>
                     </div>
-                </div>
+
+                    <div class="mb-2">
+                        <label for="loginPassword" class="block text-white text-xs mb-1">Password</label>
+                        <div class="input-field flex items-center rounded-lg px-2 py-1.5">
+                            <i class="fas fa-lock text-white mr-2"></i>
+                            <input type="password" name="password" id="loginPassword" class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none" placeholder="Enter your password">
+                            <button type="button" id="toggleLogPassword" class="text-white ml-2 focus:outline-none">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center mt-3 space-y-2">
+                        <button id="loginButton" class="login-button">
+                            Login
+                        </button>
+                        <button id="createGrowIdButton" class="login-button">
+                            Create GrowID
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
-</div>
-</body>
-<!-- JQUERY LIBRARY -->
-<script src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/jquery/jquery-2.1.4.min.js"></script>
-<!-- boostrap javascript -->
-<script src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/bootstrap/javascripts/bootstrap.min.js"></script>
-<script>
-    let clicked = false;
-    $("a").click( function() { if (clicked === false) { clicked = true; return true; } $(this).attr("onclick", "return false;"); } );
-    $('document').ready(function () {
-        document.onkeydown = (e) => {
-            if (e.key == 123) {
-                e.preventDefault();
-            }
-            if (e.key == 'F12') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key == 'I') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.key == 'I') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key == 'C') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key == 'J') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.key == 'U') {
-                e.preventDefault();
-            }
-        };
-        $('#modalButton').trigger('click');
-        $('.close').on('click', function () {
-            window.location = "https://login.creativeps.eu/player/validate/close"
-        });
-        // $('form').submit($('form .grow-button').attr('disabled', 'true'));
+    </div>
 
-        var observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                for (var i = 0; i < mutation.addedNodes.length; i++) {
-                    if (mutation.addedNodes[i].tagName == 'DIV') {
-                        var thediv = mutation.addedNodes[i];
-                        var sw = window.screen.width;
-                        if (sw < 667) {
-                            $(thediv).css({
-                                'transform': 'scale(0.75)',
-                                'transform-origin': '0 0',
-                                '-webkit-transform': 'scale(0.75)',
-                                '-webkit-transform-origin': '0 0',
-                                'overflow': 'auto'
-                            });
-                        }
-                    }
-                }
+    <script>
+        // [JavaScript remains the same as previous version]
+        document.addEventListener('DOMContentLoaded', function () {
+            const textElement = document.getElementById('animatedText');
+            const textContent = 'G R O W T O P I A <> D A S H B O A R D';
+
+            textContent.split('').forEach((char) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                textElement.appendChild(span);
             });
+
+            function getRandomBrightColor() {
+                const r = Math.floor(Math.random() * 128 + 128);
+                const g = Math.floor(Math.random() * 128 + 128);
+                const b = Math.floor(Math.random() * 128 + 128);
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            let index = 0;
+            const spans = textElement.querySelectorAll('span');
+            setInterval(() => {
+                spans.forEach((span, i) => {
+                    span.style.color = i === index ? getRandomBrightColor() : 'white';
+                });
+                index = (index + 1) % spans.length;
+            }, 200);
+            const storedGrowId = localStorage.getItem('growId');
+            const storedPassword = localStorage.getItem('password');
+
+            if (storedGrowId) {
+                document.getElementById('loginGrowId').value = storedGrowId;
+            }
+
+            if (storedPassword) {
+                document.getElementById('loginPassword').value = storedPassword;
+            }
         });
-        observer.observe(document.body, {attributes: false, childList: true, characterData: false});
-    });
-</script>
+
+        document.getElementById('loginButton').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const loginForm = document.getElementById('loginForm');
+            const uName = document.getElementById('loginGrowId').value;
+            const uPass = document.getElementById('loginPassword').value;
+
+            if (!uName || !uPass) {
+                document.getElementById('errorDiv').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = 'Username or Password is empty';
+                return;
+            } else if (uName.length < 3 || uPass.length < 4) {
+                document.getElementById('errorDiv').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = 'Username or Password must be at least 4 characters long';
+                return;
+            } else {
+                document.querySelector('input[name="type"]').value = 'login';
+                localStorage.setItem('growId', uName);
+                localStorage.setItem('password', uPass);
+                localStorage.setItem('type', 'login');
+                loginForm.submit();
+            }
+        });
+
+        document.getElementById('createGrowIdButton').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const loginForm = document.getElementById('loginForm');
+            const uName = document.getElementById('loginGrowId').value;
+            const uPass = document.getElementById('loginPassword').value;
+
+            if (!uName || !uPass) {
+                document.getElementById('errorDiv').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = 'Username or Password is empty';
+                return;
+            } else if (uName.length < 3 || uPass.length < 4) {
+                document.getElementById('errorDiv').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = 'Username or Password must be at least 4 characters long';
+                return;
+            } else {
+                document.querySelector('input[name="type"]').value = 'create';
+                localStorage.setItem('growId', uName);
+                localStorage.setItem('password', uPass);
+                localStorage.setItem('type', 'create');
+                loginForm.submit();
+            }
+        });
+
+        document.getElementById('toggleLogPassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('loginPassword');
+            const passwordFieldType = passwordField.getAttribute('type');
+            if (passwordFieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordField.setAttribute('type', 'password');
+                this.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+    </script>
+</body>
 </html>
